@@ -9,9 +9,8 @@ import  img from"../../../assets/images/hoaban.jpg";
 import  img1 from "../../../assets/images/hoa.jpg";
 const Banner = styled.div`
     background-image: url(${img1});
-    background-color: rgb(96 165 250); /* Used if the image is unavailable */
-    //background-position: left; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
+    background-color: rgb(96 165 250); 
+    background-repeat: no-repeat; 
     background-attachment: fixed;
     background-size: 100% 100%;
     object-fit: cover;
