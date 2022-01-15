@@ -8,4 +8,4 @@ export const SCREENS = {
     xl:"1280px",
     
     "2xl":"1536px",
-}
+};

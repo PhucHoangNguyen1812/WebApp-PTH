@@ -2,10 +2,21 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import {CgMouse}  from "react-icons/all"
 import tw from 'twin.macro';
-
+import {Product} from "./Product";
+import { IStack } from '../../../typings/product';
+import {SCREENS} from "../../components/responsive";
+import  img from"../../../assets/images/hoaban.jpg";
+import  img1 from "../../../assets/images/hoa.jpg";
 const Banner = styled.div`
+    background-image: url(${img1});
+    background-color: rgb(96 165 250); /* Used if the image is unavailable */
+    //background-position: left; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    object-fit: cover;
     ${tw`
-        bg-gradient-to-r  from-blue-400 to-blue-700
+        //bg-gradient-to-r  from-blue-400 to-blue-700
         h-screen
         text-center
         flex
@@ -22,6 +33,24 @@ const Banner = styled.div`
     p {
         font: 300 1.4vmax "Lucida Sans"
     }
+    a > ButtonHome {
+        background-color: rgba(2);
+    }
+    ::after {
+        content: "";
+        width: 100vw;
+        height: 100vmin;
+        background-color: #ffffff;
+        position: absolute;
+        top:0%;
+        left:0;
+        clip-path: polygon(50% 70%, 0% 100%, 100% 100%);
+        max-width: 100%;
+        @media screen and (max-width: ${SCREENS.sm}) {
+            position: absolute;
+            top:54%;
+        }
+    }
 `;
 const ContainerHome = styled.a`
 
@@ -35,39 +64,92 @@ const ButtonHome = styled.button`
     border-radius: 200vmax;
     padding: 0 0 0.2vmax 0;
     transition: all 0.5s;
-    width:10vmax;
-    height: 4.5vmax;
+    width:9vmax;
+    height: 4vmax;
     font: 500 1vmax "Roboto";
     color: black;
-
+    &:hover {
+        ${tw`
+            bg-blue-500
+            text-white
+        `}
+    }
+    
 `;
 
 const DivIcon = styled.div`
     ${tw`
+        relative
+        top[1px]
         flex
         flex-row
-        height[1vmax]
+        height[2vmax]
         text-center
         items-center
         justify-center
+
     `}
 
 `;
 
-export default function Home() {
+const HomeHeading = styled.h2`
+    border-bottom: 1px solid rgba(59 130 246);
+    width: 20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+    ${tw`
+        text-center
+        font-family[Roboto]
+        font-size[1.4vmax]
+        text-gray-700
+        
+    `}
+`;
+
+const Container = styled.div`
+    margin: 2vmax auto;
+    width: 80vw;
+    ${tw`
+        flex
+        flex-wrap  
+        justify-center
+    `};
+    
+`;
+
+export function Home() {
+
+    const product: IStack = {
+        name: "Áo sơ mi xanh",
+        image: img,
+        price:"300.000đ",
+        _id: 1,
+    };
+
     return <Fragment>
         <Banner>
             <p>Chào Mừng Đến Với PTHSHOPER</p>
-            <h1>Những Sản Phẩm Thú Vị Đang Đợi Bạn</h1>
+            <h1>NHỮNG SẢN PHẨM THÚ VỊ ĐANG ĐỢI BẠN</h1>
             <ContainerHome href='#container'>
                 <ButtonHome>
                     <DivIcon>
                         <p>Cuộn</p>
-                        <CgMouse size={30}/>
+                        <CgMouse size={25}/>
                     </DivIcon>
                 </ButtonHome>  
             </ContainerHome>
         </Banner>
+        <HomeHeading>Các Sản Phẩm Hiện Tại</HomeHeading>
+        <Container className="container" id="container">
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+            <Product {...product} />
+        </Container>
     </Fragment>
     
 };
