@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useEffect,useState } from 'react'
 import styled from 'styled-components'
 import {CgMouse}  from "react-icons/all"
 import tw from 'twin.macro';
@@ -7,6 +7,12 @@ import { IStack } from '../../../typings/product';
 import {SCREENS} from "../../components/responsive";
 import  img from"../../../assets/images/hoaban.jpg";
 import  img1 from "../../../assets/images/hoa.jpg";
+import {MetaData} from '../layout/MetaData';
+import { getProduct } from '../../../actions/productAction';
+import { useSelector, useDispatch } from 'react-redux';
+import reducer  from '../../../store'; 
+import { RootStore } from '../../../store';
+
 const Banner = styled.div`
     background-image: url(${img1});
     background-color: rgb(96 165 250); 
@@ -118,6 +124,8 @@ const Container = styled.div`
 
 export function Home() {
 
+    const dispatch = useDispatch();
+    const [productName, setProductName] = useState("");
     const product: IStack = {
         name: "Áo sơ mi xanh",
         image: img,
@@ -125,7 +133,16 @@ export function Home() {
         _id: 1,
     };
 
+    const productState = useSelector((state: RootStore) => state.product)
+
+    useEffect(() => {
+        dispatch( getProduct(productName));
+    }, [dispatch])
+
     return <Fragment>
+
+        <MetaData title = "PTHFLOWER"/>
+
         <Banner>
             <p>Chào Mừng Đến Với PTHSHOPER</p>
             <h1>NHỮNG SẢN PHẨM THÚ VỊ ĐANG ĐỢI BẠN</h1>
